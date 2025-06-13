@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Nijie Downloader Mod",
-  "version": "1.2.0",
-  "description": "Image downloader for nijie.info, big fixed",
+  "version": "1.2.1",
+  "description": "Image downloader for nijie.info, bug fixed",
   "default_locale": "en",
   "icons": {
     "128": "icon.png"

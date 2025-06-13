@@ -1,6 +1,6 @@
 ![icon](/public/icon.png)
 
-# Nijie Downloader
+# Nijie Downloader Mod
 
 Browsers extension for download images in nijie.info.
 
