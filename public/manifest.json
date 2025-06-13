@@ -11,7 +11,7 @@
     "service_worker": "background.js"
   },
   "content_scripts": [ {
-    "matches": [ "*://nijie.info/view_popup.php?id=*" ],
+    "matches": [ "*://nijie.info/view.php?id=*" ],
     "css": [ "content.css" ],
     "js": [ "content.js" ]
   } ],
