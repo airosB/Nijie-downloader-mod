@@ -152,8 +152,21 @@ const save = async (): Promise<void> => {
 const init = () => {
   const boxElem = document.createElement('div');
   boxElem.className = 'nijie_downloader-wrapper';
+
+  const buttonStyles = [
+    'border: 6px solid #FFEA00',
+    'background: #ffffff',
+    'border-radius: 11px',
+    'cursor: pointer',
+    'font-size: 150%',
+    'font-weight: bold',
+    'padding: 5px 10px',
+    'box-shadow: inset 1px 1px 4px 0px rgba(0, 0, 0, 0.6)',
+  ]
+
   const downloadBtn = document.createElement('button');
   downloadBtn.className = 'nijie_downloader-download_button';
+  downloadBtn.style.cssText = buttonStyles.join(';');
   downloadBtn.textContent = browser.i18n.getMessage('download');
   downloadBtn.onclick = save;
   boxElem.appendChild(downloadBtn);
