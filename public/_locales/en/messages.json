@@ -54,6 +54,9 @@
   "settings_pageNumber": {
     "message": "Page Number"
   },
+  "settings_padPageNumber": {
+    "message": "Page Number (zero-padded to three digits)"
+  },
   "settings_postYear": {
     "message": "Post year"
   },
@@ -76,6 +79,6 @@
     "message": "'\\/:*?\"&lt;&gt;|~' is replaced '_'."
   },
   "settings_note2": {
-    "message": "$${page} must be located last path element."
+    "message": "$${page} or $${padPage} must be located last path element."
   }
 }

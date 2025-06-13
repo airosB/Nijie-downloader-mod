@@ -24,7 +24,7 @@ let tabId: number | undefined;
  * 全部で10枚→2桁(01 - 10)
  * @param length 画像ファイルリストの長さ
  */
-const calcWidth = (length: number): number => {
+const calcDigits = (length: number): number => {
   return length.toString().length;
 };
 
@@ -67,11 +67,11 @@ const getSavePath = (pathElems: string[], info: Info): string[] => {
 
 /**
  * ページ数を返す
- * @param width 連番数字幅
+ * @param digits 連番数字幅
  * @param index 添字
  */
-const getPageNumber = (width: number, index: number): string => {
-  return index.toString().padStart(width, '0');
+const getPageNumber = (digits: number, index: number): string => {
+  return index.toString().padStart(digits, '0');
 };
 
 /**
@@ -80,11 +80,13 @@ const getPageNumber = (width: number, index: number): string => {
 const getSaveFileName = (
   setting: string,
   url: string,
-  width: number,
+  digits: number,
   index: number,
 ): string => {
   const extension = url.substring(url.lastIndexOf('.'));
-  setting = setting.replace('${page}', getPageNumber(width, index));
+  setting = setting
+    .replace('${page}', getPageNumber(digits, index))
+    .replace('${padPage}', getPageNumber(3, index))
   return setting + extension;
 };
 
@@ -115,8 +117,7 @@ const getSaveFilePathSetting = async (isSingle: boolean): Promise<string> => {
  * ダウンロードする
  */
 const download = async (info: Info): Promise<any> => {
-  // console.log('Receive download task.');
-  const width = calcWidth(info.urls.length);
+  const digits = calcDigits(info.urls.length);
 
   const setting = await getSaveFilePathSetting(info.urls.length === 1);
   const pathElems = setting.split('/');
@@ -129,11 +130,9 @@ const download = async (info: Info): Promise<any> => {
   for (let i = 0; i < info.urls.length; i++) {
     const url = info.urls[i];
     const index = i + 1;
-    const saveFileName = getSaveFileName(fileNameSetting, url, width, index);
+    const saveFileName = getSaveFileName(fileNameSetting, url, digits, index);
     const saveFilePath =
       savePath !== '' ? savePath + '/' + saveFileName : saveFileName;
-    // console.log(url);
-    // console.log(saveFilePath);
     try {
       const downloadId = await browser.downloads.download({
         url,
@@ -141,12 +140,8 @@ const download = async (info: Info): Promise<any> => {
         conflictAction: 'uniquify',
       });
       downloadingIds.push(downloadId);
-      // await browser.downloads.search({ id: downloadId });
-      // const downloadItems = await browser.downloads.search({ id: downloadId });
-      // console.log('start download', downloadItems[0].url);
     } catch (e) {
       if (e instanceof Error) {
-        // console.log(e.message);
         return { error: e.message };
       }
     }
@@ -169,9 +164,6 @@ browser.runtime.onMessage.addListener((message, sender) => {
 browser.downloads.onChanged.addListener(async (delta) => {
   if (downloadingIds.includes(delta.id) && delta.state) {
     if (delta.state.current === 'complete') {
-      // await browser.downloads.search({ id: delta.id });
-      // const downloadItems = await browser.downloads.search({ id: delta.id });
-      // console.log('finish download', downloadItems[0].url);
       downloadingIds.splice(downloadingIds.indexOf(delta.id), 1);
       if (tabId !== undefined) {
         browser.tabs.sendMessage(tabId, {

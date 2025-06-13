@@ -1,7 +1,7 @@
 import browser from 'webextension-polyfill';
 
 const singleDefault = 'nijie/${userName}(${userId})/${title}(${id})';
-const multiDefault = 'nijie/${userName}(${userId})/${title}(${id})/${page}';
+const multiDefault = 'nijie/${userName}(${userId})/${title}(${id})/${padPage}';
 
 function saveOptions(e: Event) {
   try {

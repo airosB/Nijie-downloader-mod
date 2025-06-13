@@ -28,7 +28,7 @@
       <dt i18n="defaultSingle">Default (single)</dt>
       <dd><code>nijie/${userName}(${userId})/${title}(${id})</code></dd>
       <dt i18n="defaultMulti">Default (multi)</dt>
-      <dd><code>nijie/${userName}(${userId})/${title}(${id})/${page}</code></dd>
+      <dd><code>nijie/${userName}(${userId})/${title}(${id})/${padPage}</code></dd>
     </dl>
     <table>
       <thead>
@@ -57,6 +57,10 @@
         <tr>
           <td>${page}</td>
           <td i18n="pageNumber">Page Number</td>
+        </tr>
+        <tr>
+          <td>${padPage}</td>
+          <td i18n="padPageNumber">Page Number</td>
         </tr>
         <tr>
           <td>${YYYY}</td>

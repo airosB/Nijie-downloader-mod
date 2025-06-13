@@ -54,6 +54,9 @@
   "settings_pageNumber": {
     "message": "ページ番号"
   },
+  "settings_padPageNumber": {
+    "message": "ページ番号（3桁になるようゼロ埋め）"
+  },
   "settings_postYear": {
     "message": "投稿年"
   },
@@ -76,6 +79,6 @@
     "message": "'\\/:*?\"&lt;&gt;|~'は'_'に置換されます。"
   },
   "settings_note2": {
-    "message": "$${page}は最後のパス要素に置く必要があります。"
+    "message": "$${page} および $${padPage} は最後のパス要素に置く必要があります。"
   }
 }
