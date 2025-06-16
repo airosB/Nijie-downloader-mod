@@ -4,7 +4,8 @@
 
 Browsers extension for download images in nijie.info.
 
-![screenshot](/screenshot.png)
+
+<img src="/src/screenshot.png" alt="screenshot" style="width: 900px;">
 
 ## Build
 
